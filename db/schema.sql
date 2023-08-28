@@ -9,7 +9,7 @@ CREATE TABLE precint_41 (
   rank VARCHAR(40) NOT NULL, 
   current_case VARCHAR(40) NOT NULL,
   district VARCHAR(20) NOT NULL,
-  department TEXT NOT NULL,
+  salary VARCHAR (12) NOT NULL, 
   notes VARCHAR(256) NOT NULL;
 );
 
@@ -19,7 +19,6 @@ CREATE TABLE precint_57 (
   rank VARCHAR(40) NOT NULL, 
   current_case VARCHAR(40) NOT NULL,
   district VARCHAR(20) NOT NULL,
-  precint INT(4) NOT NULL,
-  department TEXT NOT NULL,
+  salary INT (6) NOT NULL,
   notes VARCHAR(256) NOT NULL;
 );
