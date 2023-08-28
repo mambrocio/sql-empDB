@@ -1,24 +1,32 @@
-const express = require('express');
+const db = require('./db/connection.js');
+const inquirer = require('inquirer');
 
-const mysql = require('mysql2');
+//Either functions to validate or leave that up to the then after 
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+function viewDpart(){
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+}
 
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      // MySQL username,
-      user: '[90ggm5!SQP',
-      // MySQL password
-      password: '',
-      database: 'rcm_db'
-    },
-    console.log(`Connected to the classlist_db database.`)
-  );
-  
+function empDB(){
+  inquirer
+    .prompt([
+      {
+      type: 'list',
+      message: 'Enter DB Command To View ',
+      name: 'DBInput',
+      choices: [{name: "View Departments", value: "View_Departments"}, "View Roles", "View Employees"],
+      }
+    ])
 
-  
+    .then(function(res){
+      let choice = res.DBInput;
+      console.log(choice)
+        switch (choice){
+          case "View_Departments":
+            viewDpart();
+            break;
+        }
+    })
+}
+
+empDB();
