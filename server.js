@@ -1,12 +1,21 @@
-const db = require('./db/connection.js');
+// const db = require('./db/connection.js');
 const inquirer = require('inquirer');
+const db = require('./db');
 
 //Either functions to validate or leave that up to the then after 
 
-function viewDpart(){
 
+
+function vwDpart() {
+  db.findAllDepartments()
+
+    .then(([rows]) => {
+      let departments = rows;
+      console.log("\n");
+      console.table(departments);
+    })
+    .then(() => empDB());
 }
-
 
 
 function empDB(){
@@ -25,7 +34,7 @@ function empDB(){
       console.log(choice)
         switch (choice){
           case "View_Departments":
-            viewDpart();
+            vwDpart();
             break;
         }
     })

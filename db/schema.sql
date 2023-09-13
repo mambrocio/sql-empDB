@@ -4,26 +4,24 @@ CREATE DATABASE RCM_db;
 USE RCM_db;
 
 CREATE TABLE department (
-  precinct INT(4) NOT NUll  
-  dep_name VARCHAR(30) NOT NULL,
-  PRIMARY KEY (precinct)
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  dep_name VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE role (
-  badge_id VARCHAR(6) NOT NULL,
+CREATE TABLE role_list ( 
+  id INT AUTO_INCREMENT PRIMARY KEY,
   rank VARCHAR(20) NOT NULL,
-  salary VARCHAR (8) NOT NULL,
-  station INT (4) NOT NULL,
-  FOREIGN KEY (badge_id)
-  REFERENCES department (precinct)
-  ON DELETE SET NULL
+  salary VARCHAR(8) NOT NULL,
+  dep_id INT UNSIGNED NOT NULL,
+  CONSTRAINT fk_department FOREIGN KEY (dep_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
-CREATE TABLE officers (
-  dep_id INT(9) NOT NULL,
-  first_name VARCHAR (40) NOT NULL,
-  last_name VARCHAR (40) NOT NULL,
-  rank VARCHAR (25) NOT NULL,
-  supervisor INT (12) NOT NULL,
-  ON DELETE SET NULL
-)
+CREATE TABLE employees (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(40) NOT NULL,
+  last_name VARCHAR(40) NOT NULL,
+  role_id INT NOT NULL,  
+  supervisor_id INT(12) NOT NULL,
+  CONSTRAINT fk_role_list FOREIGN KEY (role_id) REFERENCES role_list(id) ON DELETE CASCADE,
+  CONSTRAINT fk_supervisor FOREIGN KEY (supervisor_id) REFERENCES employees(id) ON DELETE SET NULL
+);

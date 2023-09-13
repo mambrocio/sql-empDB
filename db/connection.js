@@ -15,11 +15,18 @@ const db = mysql.createConnection(
       user: 'root',
       // MySQL password
       password: '[90ggm5!SQP',
-      database: 'rcm_db'
-      
-      //Reinstall SQL 
+      database: 'employees'
     },
-    console.log(`Connected to the classlist_db database.`)
+    console.log(`Connected to the RCM database.`)
   );
   
-module.export = db;
+
+  app.use((req, res) => {
+    res.status(404).end();
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+
+module.exports = db;
